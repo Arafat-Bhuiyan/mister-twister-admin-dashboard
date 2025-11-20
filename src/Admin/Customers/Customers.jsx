@@ -1,27 +1,26 @@
 import React from "react";
-import { Search, Plus } from "lucide-react";
+import { Search } from "lucide-react";
 import { CommonCards } from "@/components/CommonCards";
-import CommonTable from "@/components/CommonTable";
 
-export const Vendors = () => {
-  const vendorCards = [
+export const Customers = () => {
+      const customersCards = [
     {
-      title: "Total Vendors",
+      title: "Total Customers",
       number: "24",
       numberColor: "#101828",
     },
     {
-      title: "Active Vendors",
+      title: "Active Customers",
       number: "20",
       numberColor: "#1A9F42",
     },
     {
-      title: "On Shift",
+      title: "Total Requests",
       number: "14",
       numberColor: "#2B7FFF",
     },
     {
-      title: "Trial",
+      title: "Recent Activity",
       number: "5",
       numberColor: "#FE9A00",
     },
@@ -38,17 +37,9 @@ export const Vendors = () => {
             className="h-9 w-full rounded-[24px] border border-gray-200 bg-white pl-10 pr-3 text-sm placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
-        {/* Add vendors button */}
-        <button className="flex h-9 w-64 flex-shrink-0 items-center justify-center gap-2 rounded-[24px] border border-gray-200 bg-white px-3 text-sm font-medium text-black hover:bg-gray-50">
-          <Plus className="h-4 w-4" />
-          <span>Add Vendor</span>
-        </button>
       </div>
       {/* Pass the vendor-specific data to the reusable component */}
-      <CommonCards cards={vendorCards} />
-
-      {/* Table */}
-      <CommonTable />
+      <CommonCards cards={customersCards} />
     </div>
   );
 };

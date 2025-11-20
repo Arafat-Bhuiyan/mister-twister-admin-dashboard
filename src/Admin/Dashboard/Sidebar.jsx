@@ -12,7 +12,7 @@ export const Sidebar = ({ currentComponent, onMenuClick }) => {
       slug: "dashboard",
     },
     { icon: Truck, label: "Vendors", slug: "vendors-management" },
-    { icon: Users, label: "Customers", slug: "customers" },
+    { icon: Users, label: "Customers", slug: "customers-management" },
     { icon: MapPin, label: "Live Map", slug: "live_map" },
     { icon: Bell, label: "Requests", slug: "requests" },
     { icon: Settings, label: "Settings", slug: "settings" },
