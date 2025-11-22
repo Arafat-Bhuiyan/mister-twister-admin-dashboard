@@ -1,10 +1,10 @@
 import Login from "@/Admin/Auth/Login";
-import { Vendors } from "@/Admin/Vendors/Vendors";
 import MainDashboard from "@/Admin/Dashboard/MainDashboard";
 
 import AdminLayout from "@/layouts/AdminLayout";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { Customers } from "@/Admin/Customers/Customers";
+import { Drivers } from "@/Admin/Drivers/Drivers";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         index: true,
         element: <MainDashboard />,
       },
-      { path: "vendors-management", element: <Vendors /> },
+      { path: "drivers-management", element: <Drivers /> },
       { path: "customers-management", element: <Customers /> },
       // future admin sub-routes can be added here, e.g.:
       // { path: "users", element: <UserManagement /> },

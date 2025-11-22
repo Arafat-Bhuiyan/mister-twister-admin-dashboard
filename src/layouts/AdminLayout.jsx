@@ -9,8 +9,8 @@ export default function AdminLayout() {
 
   const location = useLocation();
 
-  const title = location.pathname.startsWith(`/admin/vendors-management`)
-    ? "Vendors Management"
+  const title = location.pathname.startsWith(`/admin/drivers-management`)
+    ? "Drivers Management"
     : location.pathname.startsWith(`/admin/customers-management`)
     ? "Customers Management"
     : location.pathname.startsWith(`/admin/challenges`)
@@ -19,8 +19,8 @@ export default function AdminLayout() {
     ? "Settings"
     : "Dashboard Overview";
 
-  const subtitle = location.pathname.startsWith(`/admin/vendors-management`)
-    ? "Manage all ice cream truck vendors"
+  const subtitle = location.pathname.startsWith(`/admin/drivers-management`)
+    ? "Manage all ice cream truck drivers"
     : location.pathname.startsWith(`/admin/customers-management`)
     ? "View and manage all registered customers"
     : location.pathname.startsWith(`/admin/challenges`)

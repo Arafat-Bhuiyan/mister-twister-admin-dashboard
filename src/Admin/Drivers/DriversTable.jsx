@@ -1,9 +1,8 @@
 "use client";
 
 import { SquarePen, Trash } from "lucide-react";
-import drivers from "../../../public/driversInfo.json";
 
-export default function DriversTable({ onViewDetails }) {
+export default function DriversTable({ drivers }) {
   const getStatusColor = (status) => {
     switch (status.toLowerCase()) {
       case "active":
@@ -11,12 +10,10 @@ export default function DriversTable({ onViewDetails }) {
       case "inactive":
         return "bg-[#6A7282]/10 border border-[#6A7282]/20 text-[#6A7282]";
       default:
-        return "bg-gray-100 text-gray-700";
+        return "bg-[#FE9A00]/10 border border-[#FE9A00]/20 text-[#FE9A00]";
     }
   };
 
-  // Directly use the orders from the JSON file without filtering
-  const filteredDrivers = drivers;
   return (
     <div className="min-h-screen">
       {/* Table */}
@@ -38,7 +35,7 @@ export default function DriversTable({ onViewDetails }) {
                   Status
                 </th>
                 <th className="px-6 py-4 text-center text-sm font-medium text-gray-600">
-                  Shift
+                  On Shift
                 </th>
                 <th className="px-6 py-4 text-center text-sm font-medium text-gray-600">
                   Zone
@@ -49,15 +46,17 @@ export default function DriversTable({ onViewDetails }) {
               </tr>
             </thead>
             <tbody>
-              {filteredDrivers.length > 0 ? (
-                filteredDrivers.map((driver) => (
+              {drivers.length > 0 ? (
+                drivers.map((driver) => (
                   <tr
                     key={driver.id}
                     className="border-b border-[#E5E7EB] hover:bg-gray-50 transition-colors"
                   >
                     <td className="px-6 py-4 text-center text-sm font-normal text-gray-900 ">
                       {driver.driverName} <br />
-                      <span className="text-[#525355] font-normal text-xs">{driver.driverId}</span>
+                      <span className="text-[#525355] font-normal text-xs">
+                        {driver.driverId}
+                      </span>
                     </td>
                     <td className="px-6 py-4 text-center text-sm font-normal text-gray-900">
                       {driver.email}
@@ -78,7 +77,9 @@ export default function DriversTable({ onViewDetails }) {
                       {driver.shift}
                     </td>
                     <td className="px-6 py-4 text-center text-sm font-normal text-gray-900">
-                      {driver.zone}
+                      <div className="inline-flex items-center gap-2">
+                        {driver.zone}
+                      </div>
                     </td>
                     <td className="px-6 py-4 text-sm flex items-center justify-center gap-2">
                       <button className="px-2.5 py-2 bg-[#F3F4F6] rounded-lg">
@@ -96,7 +97,7 @@ export default function DriversTable({ onViewDetails }) {
                     colSpan="7"
                     className="text-center py-6 text-gray-500 text-sm"
                   >
-                    No orders found for this Order ID.
+                    No drivers found.
                   </td>
                 </tr>
               )}

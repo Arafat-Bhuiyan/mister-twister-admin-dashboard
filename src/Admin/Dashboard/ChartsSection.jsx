@@ -34,7 +34,7 @@ const ChartsSection = () => {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     datasets: [
       {
-        label: "Active Vendors",
+        label: "Active Drivers",
         data: [150, 180, 220, 200, 170, 190, 250], // Sample data
         backgroundColor: "#2A98FF",
         borderRadius: 8,
@@ -83,7 +83,7 @@ const ChartsSection = () => {
           className="pb-5"
         >
           <h3 className="text-black text-xl font-normal">
-            Active Vendors Trend (Last 7 Days)
+            Active Drivers Trend (Last 7 Days)
           </h3>
         </div>
         <div className="h-64">

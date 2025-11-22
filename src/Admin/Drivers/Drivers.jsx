@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { Search, Plus } from "lucide-react";
 import { CommonCards } from "@/components/CommonCards";
 import DriversTable from "./DriversTable";
+import allDriversData from "../../../public/driversInfo.json";
 
-
-export const Vendors = () => {
-  const vendorCards = [
+export const Drivers = () => {
+  const driverCards = [
     {
-      title: "Total Vendors",
+      title: "Total Drivers",
       number: "24",
       numberColor: "#101828",
     },
     {
-      title: "Active Vendors",
+      title: "Active Drivers",
       number: "20",
       numberColor: "#1A9F42",
     },
@@ -27,6 +27,18 @@ export const Vendors = () => {
       numberColor: "#FE9A00",
     },
   ];
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredDrivers = useMemo(() => {
+    if (!searchQuery) {
+      return allDriversData;
+    }
+    return allDriversData.filter(
+      (driver) => driver.driverName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [searchQuery]);
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center gap-4">
@@ -35,21 +47,23 @@ export const Vendors = () => {
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
-            placeholder="Search by customer or vendor name..."
+            placeholder="Search by driver name..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="h-9 w-full rounded-[24px] border border-gray-200 bg-white pl-10 pr-3 text-sm placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
-        {/* Add vendors button */}
+        {/* Add drivers button */}
         <button className="flex h-9 w-64 flex-shrink-0 items-center justify-center gap-2 rounded-[24px] border border-gray-200 bg-white px-3 text-sm font-medium text-black hover:bg-gray-50">
           <Plus className="h-4 w-4" />
-          <span>Add Vendor</span>
+          <span>Add Driver</span>
         </button>
       </div>
-      {/* Pass the vendor-specific data to the reusable component */}
-      <CommonCards cards={vendorCards} />
+      {/* Pass the driver-specific data to the reusable component */}
+      <CommonCards cards={driverCards} />
 
       {/* Table */}
-      <DriversTable />
+      <DriversTable drivers={filteredDrivers} />
     </div>
   );
 };

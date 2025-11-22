@@ -53,7 +53,7 @@ export const Customers = () => {
           />
         </div>
       </div>
-      {/* Pass the vendor-specific data to the reusable component */}
+      {/* Pass the driver-specific data to the reusable component */}
       <CommonCards cards={customersCards} />
       {/* Table */}
       <CustomersTable customers={filteredCustomers} />
