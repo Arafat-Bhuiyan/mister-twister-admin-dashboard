@@ -1,9 +1,11 @@
 import React, { useState, useMemo } from "react";
 import { Search, Plus } from "lucide-react";
+import { Toaster, toast } from "react-hot-toast";
 import { CommonCards } from "@/components/CommonCards";
 import DriversTable from "./DriversTable";
 import allDriversData from "../../../public/driversInfo.json";
 import AddDriverModal from "./AddDriverModal";
+import EditDriverModal from "./EditDriverModal";
 
 export const Drivers = () => {
   const driverCards = [
@@ -31,7 +33,9 @@ export const Drivers = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [drivers, setDrivers] = useState(allDriversData);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [driverToEdit, setDriverToEdit] = useState(null);
 
   const filteredDrivers = useMemo(() => {
     if (!searchQuery) {
@@ -49,18 +53,54 @@ export const Drivers = () => {
       id: (drivers.length + 1).toString(), // Simple ID generation
     };
     setDrivers([driverToAdd, ...drivers]); // Add new driver to the top of the list
-    setIsModalOpen(false); // Close the modal
+    setIsAddModalOpen(false); // Close the modal
   };
 
-  const handleDeleteDriver = () => {
-    setDrivers((prev) => prev.filter((d) => d.id !== driverToDelete));
-    setIsDeleteModalOpen(false);
-    setDriverToDelete(null);
+  const handleEditDriver = (updatedDriver) => {
+    setDrivers((currentDrivers) =>
+      currentDrivers.map((driver) =>
+        driver.id === updatedDriver.id ? updatedDriver : driver
+      )
+    );
+    setIsEditModalOpen(false);
+    setDriverToEdit(null);
+    toast.success("Driver updated successfully!");
+  };
+
+  const handleDeleteDriver = (driverId) => {
+    setDrivers((currentDrivers) =>
+      currentDrivers.filter((driver) => driver.id !== driverId)
+    );
     toast.success("Driver deleted successfully!");
   };
 
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [driverToDelete, setDriverToDelete] = useState(null);
+  const confirmDelete = (driverId) => {
+    toast(
+      (t) => (
+        <div className="flex flex-col gap-3">
+          <p>Are you sure you want to delete this driver?</p>
+          <div className="flex gap-2">
+            <button
+              className="w-full rounded-md bg-red-500 px-3 py-1 text-sm text-white"
+              onClick={() => {
+                handleDeleteDriver(driverId);
+                toast.dismiss(t.id);
+              }}
+            >
+              Confirm Delete
+            </button>
+            <button
+              className="w-full rounded-md border bg-white px-3 py-1 text-sm text-black"
+              onClick={() => toast.dismiss(t.id)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ),
+      { duration: 6000 }
+    );
+  };
 
   return (
     <div className="flex flex-col gap-6">
@@ -78,7 +118,7 @@ export const Drivers = () => {
         </div>
         {/* Add drivers button */}
         <button
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => setIsAddModalOpen(true)}
           className="flex h-9 w-64 flex-shrink-0 items-center justify-center gap-2 rounded-[24px] border border-gray-200 bg-white px-3 text-sm font-medium text-black hover:bg-gray-50"
         >
           <Plus className="h-4 w-4" />
@@ -87,48 +127,29 @@ export const Drivers = () => {
       </div>
       {/* Pass the driver-specific data to the reusable component */}
       <CommonCards cards={driverCards} />
+      <Toaster position="top-center" reverseOrder={false} />
       {/* Table */}
       <DriversTable
         drivers={filteredDrivers}
-        onDeleteRequest={(id) => {
-          setDriverToDelete(id);
-          setIsDeleteModalOpen(true);
+        onEditRequest={(driver) => {
+          setDriverToEdit(driver);
+          setIsEditModalOpen(true);
         }}
+        onDeleteDriver={confirmDelete}
       />
-      {/* Modal */}
+      {/* Add Driver Modal */}
       <AddDriverModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
         onAddDriver={handleAddDriver}
       />
-
-      {isDeleteModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-[350px]">
-            <h2 className="text-lg font-semibold mb-4">Confirm Delete</h2>
-            <p className="text-sm text-gray-600 mb-6">
-              Are you sure you want to delete this driver? This action cannot be
-              undone.
-            </p>
-
-            <div className="flex justify-end gap-3">
-              <button
-                onClick={() => setIsDeleteModalOpen(false)}
-                className="px-4 py-2 rounded-md border"
-              >
-                Cancel
-              </button>
-
-              <button
-                onClick={handleDeleteDriver}
-                className="px-4 py-2 rounded-md bg-red-600 text-white"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Edit Driver Modal */}
+      <EditDriverModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        driverData={driverToEdit}
+        onSave={handleEditDriver}
+      />
     </div>
   );
 };

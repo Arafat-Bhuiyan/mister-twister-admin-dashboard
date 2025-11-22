@@ -2,7 +2,7 @@
 
 import { SquarePen, Trash } from "lucide-react";
 
-export default function DriversTable({ drivers, onDeleteRequest }) {
+export default function DriversTable({ drivers, onEditRequest, onDeleteDriver }) {
   const getStatusColor = (status) => {
     switch (status.toLowerCase()) {
       case "active":
@@ -54,9 +54,7 @@ export default function DriversTable({ drivers, onDeleteRequest }) {
                   >
                     <td className="px-6 py-4 text-center text-sm font-normal text-gray-900 ">
                       {driver.driverName} <br />
-                      <span className="text-[#525355] font-normal text-xs">
-                        {driver.driverId}
-                      </span>
+                      <span className="text-[#525355] font-normal text-xs">{driver.driverId}</span>
                     </td>
                     <td className="px-6 py-4 text-center text-sm font-normal text-gray-900">
                       {driver.email}
@@ -77,16 +75,17 @@ export default function DriversTable({ drivers, onDeleteRequest }) {
                       {driver.shift}
                     </td>
                     <td className="px-6 py-4 text-center text-sm font-normal text-gray-900">
-                      <div className="inline-flex items-center gap-2">
-                        {driver.zone}
-                      </div>
+                      {driver.zone}
                     </td>
                     <td className="px-6 py-4 text-sm flex items-center justify-center gap-2">
-                      <button className="px-2.5 py-2 bg-[#F3F4F6] rounded-lg">
+                      <button
+                        onClick={() => onEditRequest(driver)}
+                        className="px-2.5 py-2 bg-[#F3F4F6] rounded-lg"
+                      >
                         <SquarePen size={16} color="#101828" />
                       </button>
                       <button
-                        onClick={() => onDeleteRequest(driver.id)}
+                        onClick={() => onDeleteDriver(driver.id)}
                         className="px-2.5 py-2 bg-[#FE1A1A] rounded-lg"
                       >
                         <Trash size={16} color="#F3F4F6" />
