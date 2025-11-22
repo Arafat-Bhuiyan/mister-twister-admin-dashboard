@@ -3,6 +3,7 @@ import { Search, Plus } from "lucide-react";
 import { CommonCards } from "@/components/CommonCards";
 import DriversTable from "./DriversTable";
 import allDriversData from "../../../public/driversInfo.json";
+import AddDriverModal from "./AddDriverModal";
 
 export const Drivers = () => {
   const driverCards = [
@@ -29,15 +30,27 @@ export const Drivers = () => {
   ];
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [drivers, setDrivers] = useState(allDriversData);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const filteredDrivers = useMemo(() => {
     if (!searchQuery) {
-      return allDriversData;
+      return drivers;
     }
-    return allDriversData.filter(
+    return drivers.filter(
       (driver) => driver.driverName.toLowerCase().includes(searchQuery.toLowerCase())
     );
-  }, [searchQuery]);
+  }, [searchQuery, drivers]);
+
+  const handleAddDriver = (newDriver) => {
+    // Create a new driver object with a unique ID
+    const driverToAdd = {
+      ...newDriver,
+      id: (drivers.length + 1).toString(), // Simple ID generation
+    };
+    setDrivers([driverToAdd, ...drivers]); // Add new driver to the top of the list
+    setIsModalOpen(false); // Close the modal
+  };
 
   return (
     <div className="flex flex-col gap-6">
@@ -54,16 +67,24 @@ export const Drivers = () => {
           />
         </div>
         {/* Add drivers button */}
-        <button className="flex h-9 w-64 flex-shrink-0 items-center justify-center gap-2 rounded-[24px] border border-gray-200 bg-white px-3 text-sm font-medium text-black hover:bg-gray-50">
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="flex h-9 w-64 flex-shrink-0 items-center justify-center gap-2 rounded-[24px] border border-gray-200 bg-white px-3 text-sm font-medium text-black hover:bg-gray-50"
+        >
           <Plus className="h-4 w-4" />
           <span>Add Driver</span>
         </button>
       </div>
       {/* Pass the driver-specific data to the reusable component */}
       <CommonCards cards={driverCards} />
-
       {/* Table */}
       <DriversTable drivers={filteredDrivers} />
+      {/* Modal */}
+      <AddDriverModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAddDriver={handleAddDriver}
+      />
     </div>
   );
 };
