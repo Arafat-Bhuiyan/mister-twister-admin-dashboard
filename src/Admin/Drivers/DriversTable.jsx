@@ -2,7 +2,7 @@
 
 import { SquarePen, Trash } from "lucide-react";
 
-export default function DriversTable({ drivers }) {
+export default function DriversTable({ drivers, onDeleteRequest }) {
   const getStatusColor = (status) => {
     switch (status.toLowerCase()) {
       case "active":
@@ -85,7 +85,10 @@ export default function DriversTable({ drivers }) {
                       <button className="px-2.5 py-2 bg-[#F3F4F6] rounded-lg">
                         <SquarePen size={16} color="#101828" />
                       </button>
-                      <button className="px-2.5 py-2 bg-[#FE1A1A] rounded-lg">
+                      <button
+                        onClick={() => onDeleteRequest(driver.id)}
+                        className="px-2.5 py-2 bg-[#FE1A1A] rounded-lg"
+                      >
                         <Trash size={16} color="#F3F4F6" />
                       </button>
                     </td>

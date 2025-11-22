@@ -37,8 +37,8 @@ export const Drivers = () => {
     if (!searchQuery) {
       return drivers;
     }
-    return drivers.filter(
-      (driver) => driver.driverName.toLowerCase().includes(searchQuery.toLowerCase())
+    return drivers.filter((driver) =>
+      driver.driverName.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }, [searchQuery, drivers]);
 
@@ -51,6 +51,16 @@ export const Drivers = () => {
     setDrivers([driverToAdd, ...drivers]); // Add new driver to the top of the list
     setIsModalOpen(false); // Close the modal
   };
+
+  const handleDeleteDriver = () => {
+    setDrivers((prev) => prev.filter((d) => d.id !== driverToDelete));
+    setIsDeleteModalOpen(false);
+    setDriverToDelete(null);
+    toast.success("Driver deleted successfully!");
+  };
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [driverToDelete, setDriverToDelete] = useState(null);
 
   return (
     <div className="flex flex-col gap-6">
@@ -78,13 +88,47 @@ export const Drivers = () => {
       {/* Pass the driver-specific data to the reusable component */}
       <CommonCards cards={driverCards} />
       {/* Table */}
-      <DriversTable drivers={filteredDrivers} />
+      <DriversTable
+        drivers={filteredDrivers}
+        onDeleteRequest={(id) => {
+          setDriverToDelete(id);
+          setIsDeleteModalOpen(true);
+        }}
+      />
       {/* Modal */}
       <AddDriverModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onAddDriver={handleAddDriver}
       />
+
+      {isDeleteModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-[350px]">
+            <h2 className="text-lg font-semibold mb-4">Confirm Delete</h2>
+            <p className="text-sm text-gray-600 mb-6">
+              Are you sure you want to delete this driver? This action cannot be
+              undone.
+            </p>
+
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setIsDeleteModalOpen(false)}
+                className="px-4 py-2 rounded-md border"
+              >
+                Cancel
+              </button>
+
+              <button
+                onClick={handleDeleteDriver}
+                className="px-4 py-2 rounded-md bg-red-600 text-white"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
