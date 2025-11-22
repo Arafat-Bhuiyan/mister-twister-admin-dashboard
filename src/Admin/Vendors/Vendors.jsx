@@ -1,7 +1,8 @@
 import React from "react";
 import { Search, Plus } from "lucide-react";
 import { CommonCards } from "@/components/CommonCards";
-import CommonTable from "@/components/CommonTable";
+import DriversTable from "./DriversTable";
+
 
 export const Vendors = () => {
   const vendorCards = [
@@ -48,7 +49,7 @@ export const Vendors = () => {
       <CommonCards cards={vendorCards} />
 
       {/* Table */}
-      <CommonTable />
+      <DriversTable />
     </div>
   );
 };

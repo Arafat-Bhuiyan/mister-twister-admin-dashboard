@@ -1,9 +1,8 @@
 "use client";
 
-import { SquarePen, Trash } from "lucide-react";
-import drivers from "../../public/driversInfo.json";
+import { MapPin } from "lucide-react";
 
-export default function CommonTable({ onViewDetails }) {
+export default function CustomersTable({ customers }) {
   const getStatusColor = (status) => {
     switch (status.toLowerCase()) {
       case "active":
@@ -15,8 +14,6 @@ export default function CommonTable({ onViewDetails }) {
     }
   };
 
-  // Directly use the orders from the JSON file without filtering
-  const filteredDrivers = drivers;
   return (
     <div className="min-h-screen">
       {/* Table */}
@@ -26,7 +23,7 @@ export default function CommonTable({ onViewDetails }) {
             <thead>
               <tr className="border-b border-[#E5E7EB] bg-gray-50">
                 <th className="px-6 py-4 text-center text-sm font-medium text-gray-600">
-                  Driver Name
+                  Customer Name
                 </th>
                 <th className="px-6 py-4 text-center text-sm font-medium text-gray-600">
                   Email
@@ -35,58 +32,50 @@ export default function CommonTable({ onViewDetails }) {
                   Phone
                 </th>
                 <th className="px-6 py-4 text-center text-sm font-medium text-gray-600">
+                  Last Request
+                </th>
+                <th className="px-6 py-4 text-center text-sm font-medium text-gray-600">
+                  Location
+                </th>
+                <th className="px-6 py-4 text-center text-sm font-medium text-gray-600">
                   Status
-                </th>
-                <th className="px-6 py-4 text-center text-sm font-medium text-gray-600">
-                  Shift
-                </th>
-                <th className="px-6 py-4 text-center text-sm font-medium text-gray-600">
-                  Zone
-                </th>
-                <th className="px-6 py-4 text-center text-sm font-medium text-gray-600">
-                  Actions
                 </th>
               </tr>
             </thead>
             <tbody>
-              {filteredDrivers.length > 0 ? (
-                filteredDrivers.map((driver) => (
+              {customers.length > 0 ? (
+                customers.map((customer) => (
                   <tr
-                    key={driver.id}
+                    key={customer.id}
                     className="border-b border-[#E5E7EB] hover:bg-gray-50 transition-colors"
                   >
                     <td className="px-6 py-4 text-center text-sm font-normal text-gray-900 ">
-                      {driver.driverName} <br />
-                      <span className="text-[#525355] font-normal text-xs">{driver.driverId}</span>
+                      {customer.name}
                     </td>
                     <td className="px-6 py-4 text-center text-sm font-normal text-gray-900">
-                      {driver.email}
+                      {customer.email}
                     </td>
                     <td className="px-6 py-4 text-center text-sm font-normal text-gray-900">
-                      {driver.phone}
+                      {customer.phone}
+                    </td>
+
+                    <td className="px-6 py-4 text-center text-sm font-normal text-gray-900">
+                      {customer.lastrequest}
+                    </td>
+
+                    <td className="px-6 py-4 text-center text-sm font-normal text-gray-900">
+                      <div className="inline-flex items-center gap-2">
+                        <MapPin size={16} color="#4A5565" /> {customer.location}
+                      </div>
                     </td>
                     <td className="px-6 py-4 text-center text-sm">
                       <span
                         className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(
-                          driver.status
+                          customer.status
                         )}`}
                       >
-                        {driver.status}
+                        {customer.status}
                       </span>
-                    </td>
-                    <td className="px-6 py-4 text-center text-sm font-normal text-gray-900">
-                      {driver.shift}
-                    </td>
-                    <td className="px-6 py-4 text-center text-sm font-normal text-gray-900">
-                      {driver.zone}
-                    </td>
-                    <td className="px-6 py-4 text-sm flex items-center justify-center gap-2">
-                      <button className="px-2.5 py-2 bg-[#F3F4F6] rounded-lg">
-                        <SquarePen size={16} color="#101828" />
-                      </button>
-                      <button className="px-2.5 py-2 bg-[#FE1A1A] rounded-lg">
-                        <Trash size={16} color="#F3F4F6" />
-                      </button>
                     </td>
                   </tr>
                 ))
@@ -96,7 +85,7 @@ export default function CommonTable({ onViewDetails }) {
                     colSpan="7"
                     className="text-center py-6 text-gray-500 text-sm"
                   >
-                    No orders found for this Order ID.
+                    No customers found.
                   </td>
                 </tr>
               )}
