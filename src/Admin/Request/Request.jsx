@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Search, ChevronDown } from "lucide-react";
 import { CommonCards } from "@/components/CommonCards";
+import RequestTable from "./RequestTable";
+import allRequestsData from "../../../public/requestsInfo.json";
 
 export const Request = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState("All Status");
   const statuses = [
@@ -36,6 +39,21 @@ export const Request = () => {
     },
   ];
 
+  const filteredRequests = useMemo(() => {
+    return allRequestsData
+      .filter((request) => {
+        if (selectedStatus === "All Status") return true;
+        return request.status.toLowerCase() === selectedStatus.toLowerCase();
+      })
+      .filter((request) => {
+        const query = searchQuery.toLowerCase();
+        return (
+          request.customer.toLowerCase().includes(query) ||
+          request.vendor.toLowerCase().includes(query)
+        );
+      });
+  }, [searchQuery, selectedStatus]);
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center gap-4">
@@ -45,6 +63,8 @@ export const Request = () => {
           <input
             type="text"
             placeholder="Search by driver or customer name..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="h-9 w-full rounded-[24px] border border-gray-200 bg-white pl-10 pr-3 text-sm placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
@@ -82,6 +102,8 @@ export const Request = () => {
         </div>
       </div>
       <CommonCards cards={requestCards} />
+
+      <RequestTable requests={filteredRequests} />
     </div>
   );
 };
