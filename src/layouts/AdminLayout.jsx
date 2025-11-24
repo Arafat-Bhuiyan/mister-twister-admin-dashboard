@@ -26,7 +26,7 @@ export default function AdminLayout() {
     : location.pathname.startsWith(`/admin/requests`)
     ? "Monitor all ice cream delivery requests"
     : location.pathname.startsWith(`/admin/settings`)
-    ? "Settings"
+    ? "Manage admin account and system configuration"
     : "Welcome back! Here's what's happening today.";
   return (
     <div

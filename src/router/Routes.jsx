@@ -1,12 +1,12 @@
 import Login from "@/Admin/Auth/Login";
 import MainDashboard from "@/Admin/Dashboard/MainDashboard";
-
 import AdminLayout from "@/layouts/AdminLayout";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { Customers } from "@/Admin/Customers/Customers";
 import { Drivers } from "@/Admin/Drivers/Drivers";
 import { Request } from "@/Admin/Request/Request";
 import RequestDetailsCard from "@/Admin/Request/RequestDetails";
+import TermsAndPolicies from "@/Admin/Settings/Settings";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +28,7 @@ const router = createBrowserRouter([
       },
       { path: "drivers-management", element: <Drivers /> },
       { path: "customers-management", element: <Customers /> },
+      { path: "settings", element: <TermsAndPolicies /> },
       { path: "requests", element: <Request /> },
       { path: "requests/:id", element: <RequestDetailsCard /> },
 
