@@ -6,6 +6,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { Customers } from "@/Admin/Customers/Customers";
 import { Drivers } from "@/Admin/Drivers/Drivers";
 import { Request } from "@/Admin/Request/Request";
+import RequestDetailsCard from "@/Admin/Request/RequestDetails";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,8 @@ const router = createBrowserRouter([
       { path: "drivers-management", element: <Drivers /> },
       { path: "customers-management", element: <Customers /> },
       { path: "requests", element: <Request /> },
+      { path: "requests/:id", element: <RequestDetailsCard /> },
+
       // future admin sub-routes can be added here, e.g.:
       // { path: "users", element: <UserManagement /> },
     ],
