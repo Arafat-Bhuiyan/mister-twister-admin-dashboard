@@ -48,8 +48,8 @@ export const Request = () => {
       .filter((request) => {
         const query = searchQuery.toLowerCase();
         return (
-          request.customer.toLowerCase().includes(query) ||
-          request.vendor.toLowerCase().includes(query)
+          (request.customer && request.customer.toLowerCase().includes(query)) ||
+          (request.driver && request.driver.toLowerCase().includes(query))
         );
       });
   }, [searchQuery, selectedStatus]);

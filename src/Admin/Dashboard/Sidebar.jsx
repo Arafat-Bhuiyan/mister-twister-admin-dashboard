@@ -13,7 +13,7 @@ export const Sidebar = ({ currentComponent, onMenuClick }) => {
     },
     { icon: Truck, label: "Drivers", slug: "drivers-management" },
     { icon: Users, label: "Customers", slug: "customers-management" },
-    { icon: MapPin, label: "Live Map", slug: "live_map" },
+    { icon: MapPin, label: "Live Map", slug: "map" },
     { icon: Bell, label: "Requests", slug: "requests" },
     { icon: Settings, label: "Settings", slug: "settings" },
   ];

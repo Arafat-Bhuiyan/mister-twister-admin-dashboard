@@ -7,6 +7,7 @@ import { Drivers } from "@/Admin/Drivers/Drivers";
 import { Request } from "@/Admin/Request/Request";
 import RequestDetailsCard from "@/Admin/Request/RequestDetails";
 import TermsAndPolicies from "@/Admin/Settings/Settings";
+import { Map } from "@/Admin/Map/Map";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       },
       { path: "drivers-management", element: <Drivers /> },
       { path: "customers-management", element: <Customers /> },
+      { path: "map", element: <Map /> },
       { path: "settings", element: <TermsAndPolicies /> },
       { path: "requests", element: <Request /> },
       { path: "requests/:id", element: <RequestDetailsCard /> },

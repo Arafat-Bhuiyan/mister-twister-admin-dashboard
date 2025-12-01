@@ -13,6 +13,8 @@ export default function AdminLayout() {
     ? "Drivers Management"
     : location.pathname.startsWith(`/admin/customers-management`)
     ? "Customers Management"
+    : location.pathname.startsWith(`/admin/map`)
+    ? "Live Vendor Map"
     : location.pathname.startsWith(`/admin/requests`)
     ? "Customer Requests"
     : location.pathname.startsWith(`/admin/settings`)
@@ -23,6 +25,8 @@ export default function AdminLayout() {
     ? "Manage all ice cream truck drivers"
     : location.pathname.startsWith(`/admin/customers-management`)
     ? "View and manage all registered customers"
+    : location.pathname.startsWith(`/admin/map`)
+    ? "Real-time tracking of all active vendors"
     : location.pathname.startsWith(`/admin/requests`)
     ? "Monitor all ice cream delivery requests"
     : location.pathname.startsWith(`/admin/settings`)
