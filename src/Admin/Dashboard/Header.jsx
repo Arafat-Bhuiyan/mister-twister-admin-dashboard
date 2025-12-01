@@ -1,8 +1,6 @@
-import { Search } from "lucide-react";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import profile from "../../../src/assets/images/profile.jpg";
 const Header = ({ title, subtitle }) => {
-  const navigate = useNavigate();
   return (
     <div className="flex items-center justify-between px-6 py-7 bg-[#FBFBFB]">
       <div>
@@ -11,11 +9,8 @@ const Header = ({ title, subtitle }) => {
       </div>
       <div className="flex items-center gap-3">
         <div>
-          <button
-            onClick={() => navigate('/profile')}
-            className="w-10 h-10 rounded-full overflow-hidden bg-[#F5F3F3] border border-[#093349] font-bold text-base"
-          >
-            P
+          <button className="w-10 h-10 rounded-full overflow-hidden bg-[#F5F3F3] border border-[#093349] font-bold text-base">
+            <img src={profile} alt="" />
           </button>
         </div>
       </div>

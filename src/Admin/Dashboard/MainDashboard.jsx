@@ -4,13 +4,13 @@ import ChartsSection from "./ChartsSection";
 
 const cards = [
   {
-    title: "Total Drivers",
+    title: "Total Vendors",
     number: "24,892",
     icon: Truck,
     iconColor: "#FF6363",
   },
   {
-    title: "Active Drivers",
+    title: "Active Vendors",
     number: "8,342",
     icon: Users,
     iconColor: "#1A9F42",

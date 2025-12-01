@@ -10,7 +10,7 @@ export default function AdminLayout() {
   const location = useLocation();
 
   const title = location.pathname.startsWith(`/admin/drivers-management`)
-    ? "Drivers Management"
+    ? "Vendors Management"
     : location.pathname.startsWith(`/admin/customers-management`)
     ? "Customers Management"
     : location.pathname.startsWith(`/admin/map`)

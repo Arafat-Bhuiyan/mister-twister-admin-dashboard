@@ -53,7 +53,7 @@ const EditDriverModal = ({ isOpen, onClose, driverData, onSave }) => {
         <div className="flex flex-col gap-5">
           <div className="inline-flex items-center justify-between self-stretch">
             <h2 className="text-3xl font-medium leading-6 text-black">
-              Edit Driver
+              Edit Vendor
             </h2>
             <button
               onClick={onClose}
@@ -66,7 +66,7 @@ const EditDriverModal = ({ isOpen, onClose, driverData, onSave }) => {
           <div className="flex flex-col gap-7 self-stretch">
             {/* Form fields */}
             <div className="flex flex-col items-start justify-start gap-2">
-              <label className="text-base font-normal leading-6 text-black">Driver Name</label>
+              <label className="text-base font-normal leading-6 text-black">Vendor Name</label>
               <input type="text" name="driverName" value={formData.driverName} onChange={handleChange} className="w-full rounded-lg border border-neutral-300 p-3 text-base text-zinc-600 placeholder:text-zinc-400 focus:border-blue-600 focus:outline-none" />
             </div>
             <div className="flex flex-col items-start justify-start gap-2">
@@ -78,7 +78,7 @@ const EditDriverModal = ({ isOpen, onClose, driverData, onSave }) => {
               <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full rounded-lg border border-neutral-300 p-3 text-base text-zinc-600 placeholder:text-zinc-400 focus:border-blue-600 focus:outline-none" />
             </div>
             <div className="flex flex-col items-start justify-start gap-2">
-              <label className="text-base font-normal leading-6 text-black">Driver ID</label>
+              <label className="text-base font-normal leading-6 text-black">Vendor ID</label>
               <input type="text" name="driverId" value={formData.driverId} onChange={handleChange} className="w-full rounded-lg border border-neutral-300 p-3 text-base text-zinc-600 placeholder:text-zinc-400 focus:border-blue-600 focus:outline-none" />
             </div>
             <div className="flex flex-col items-start justify-start gap-2">

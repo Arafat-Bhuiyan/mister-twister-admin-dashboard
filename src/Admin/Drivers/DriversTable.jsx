@@ -23,7 +23,7 @@ export default function DriversTable({ drivers, onEditRequest, onDeleteDriver })
             <thead>
               <tr className="border-b border-[#E5E7EB] bg-gray-50">
                 <th className="px-6 py-4 text-center text-sm font-medium text-gray-600">
-                  Driver Name
+                  Vendor Name
                 </th>
                 <th className="px-6 py-4 text-center text-sm font-medium text-gray-600">
                   Email
