@@ -49,7 +49,7 @@ const AddDriverModal = ({ isOpen, onClose, onAddDriver }) => {
           {/* Header */}
           <div className="inline-flex items-center justify-between self-stretch">
             <h2 className="text-3xl font-medium leading-6 text-black">
-              Add New Vendor
+              Add New Driver
             </h2>
             <button
               onClick={onClose}
@@ -64,7 +64,7 @@ const AddDriverModal = ({ isOpen, onClose, onAddDriver }) => {
             {/* Driver Name */}
             <div className="flex flex-col items-start justify-start gap-2 self-stretch">
               <label className="text-base font-normal leading-6 text-black">
-                Vendor Name
+                Driver Name
               </label>
               <input
                 type="text"

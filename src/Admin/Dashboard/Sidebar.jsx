@@ -11,7 +11,7 @@ export const Sidebar = ({ currentComponent, onMenuClick }) => {
       active: true,
       slug: "dashboard",
     },
-    { icon: Truck, label: "Vendors", slug: "drivers-management" },
+    { icon: Truck, label: "Drivers", slug: "drivers-management" },
     { icon: Users, label: "Customers", slug: "customers-management" },
     { icon: MapPin, label: "Live Map", slug: "map" },
     { icon: Bell, label: "Requests", slug: "requests" },

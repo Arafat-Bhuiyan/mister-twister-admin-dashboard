@@ -10,11 +10,11 @@ export default function AdminLayout() {
   const location = useLocation();
 
   const title = location.pathname.startsWith(`/admin/drivers-management`)
-    ? "Vendors Management"
+    ? "Drivers Management"
     : location.pathname.startsWith(`/admin/customers-management`)
     ? "Customers Management"
     : location.pathname.startsWith(`/admin/map`)
-    ? "Live Vendor Map"
+    ? "Live Driver Map"
     : location.pathname.startsWith(`/admin/requests`)
     ? "Customer Requests"
     : location.pathname.startsWith(`/admin/settings`)
@@ -26,7 +26,7 @@ export default function AdminLayout() {
     : location.pathname.startsWith(`/admin/customers-management`)
     ? "View and manage all registered customers"
     : location.pathname.startsWith(`/admin/map`)
-    ? "Real-time tracking of all active vendors"
+    ? "Real-time tracking of all active drivers"
     : location.pathname.startsWith(`/admin/requests`)
     ? "Monitor all ice cream delivery requests"
     : location.pathname.startsWith(`/admin/settings`)

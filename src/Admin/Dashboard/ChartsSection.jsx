@@ -83,7 +83,7 @@ const ChartsSection = () => {
           className="pb-5"
         >
           <h3 className="text-black text-xl font-normal">
-            Active Vendors Trend (Last 7 Days)
+            Active Drivers Trend (Last 7 Days)
           </h3>
         </div>
         <div className="h-64">

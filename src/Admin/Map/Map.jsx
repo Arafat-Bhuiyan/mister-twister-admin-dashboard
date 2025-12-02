@@ -96,12 +96,12 @@ export const Map = () => {
 
   const customersCards = [
     {
-      title: "Active Vendors",
+      title: "Active Drivers",
       number: activeVendorsCount.toString(),
       numberColor: "#101828",
     },
     {
-      title: "Offline Vendors",
+      title: "Offline Drivers",
       number: offlineVendorsCount.toString(),
       numberColor: "#1A9F42",
     },
@@ -159,11 +159,11 @@ export const Map = () => {
             <div className="absolute bottom-4 left-4 z-[1000] bg-white p-3 rounded-xl shadow-md">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-[#00C950]"></div>
-                <span className="text-sm text-gray-700">Active Vendor</span>
+                <span className="text-sm text-gray-700">Active Driver</span>
               </div>
               <div className="flex items-center gap-2 mt-2">
                 <div className="w-3 h-3 rounded-full bg-[#6A7282]"></div>
-                <span className="text-sm text-gray-700">Offline Vendor</span>
+                <span className="text-sm text-gray-700">Offline Driver</span>
               </div>
             </div>
             {allVendorsData.map((vendor) => (
@@ -187,7 +187,7 @@ export const Map = () => {
           <div className="w-full h-[600px] overflow-y-auto relative bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
             <div className="mb-6">
               <div className="justify-start text-gray-900 text-lg font-normal leading-7">
-                Active & Offline Vendors
+                Active & Offline Drivers
               </div>
             </div>
             <div className="flex flex-col gap-3 pr-2">
