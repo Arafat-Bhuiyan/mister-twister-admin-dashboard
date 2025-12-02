@@ -1,5 +1,6 @@
 import { Eye, EyeOff, Lock, Save, Edit } from "lucide-react";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function General() {
   const [isEditing, setIsEditing] = useState(false);
@@ -22,8 +23,21 @@ export default function General() {
   };
 
   const handleSave = () => {
+    // Password validation check
+    if (formData.newPassword || formData.confirmPassword) {
+      if (formData.newPassword !== formData.confirmPassword) {
+        toast.error("New Password and Confirm Password must be match.");
+        return;
+      }
+      if (formData.newPassword.length > 0 && formData.newPassword.length < 6) {
+        toast.error("New password must be at least 6 characters long.");
+        return;
+      }
+    }
+
     // In a real application, you would send the data to your server here.
     console.log("Saving data:", formData);
+    toast.success("Admin settings saved successfully!");
 
     // Reset password fields
     setFormData((prev) => ({
@@ -39,6 +53,7 @@ export default function General() {
   };
   return (
     <div className="w-full max-w-4xl bg-white rounded-2xl shadow-lg border border-gray-200 flex flex-col gap-6">
+      <Toaster position="top-right" />
       <div className="px-6 pt-6 flex justify-between">
         <div>
           <h2 className="text-gray-900 text-base font-normal leading-4">
