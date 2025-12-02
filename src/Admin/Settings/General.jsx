@@ -39,7 +39,7 @@ export default function General() {
   };
   return (
     <div className="w-full max-w-4xl bg-white rounded-2xl shadow-lg border border-gray-200 flex flex-col gap-6">
-      <div className="px-6 pt-6">
+      <div className="px-6 pt-6 flex justify-between">
         <div>
           <h2 className="text-gray-900 text-base font-normal leading-4">
             Admin Account
@@ -48,6 +48,15 @@ export default function General() {
             Update your admin login credentials
           </p>
         </div>
+        {!isEditing && (
+          <button
+            onClick={() => setIsEditing(true)}
+            className="inline-flex items-center justify-center gap-2 h-9 px-4 py-2 bg-gray-600 rounded-[10px] text-white text-sm font-medium leading-5 hover:bg-gray-700 transition-colors"
+          >
+            <Edit size={16} />
+            <span>Edit</span>
+          </button>
+        )}
       </div>
       <div className="flex-1 relative px-6 pb-6">
         <div className="flex flex-col gap-4">
@@ -114,7 +123,11 @@ export default function General() {
                   className="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 disabled:cursor-not-allowed"
                   disabled={!isEditing}
                 >
-                  {showPassword.current ? <EyeOff size={16} /> : <Eye size={16} />}
+                  {showPassword.current ? (
+                    <EyeOff size={16} />
+                  ) : (
+                    <Eye size={16} />
+                  )}
                 </button>
               </div>
             </div>
@@ -142,7 +155,11 @@ export default function General() {
                     className="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 disabled:cursor-not-allowed"
                     disabled={!isEditing}
                   >
-                    {showPassword.new ? <EyeOff size={16} /> : <Eye size={16} />}
+                    {showPassword.new ? (
+                      <EyeOff size={16} />
+                    ) : (
+                      <Eye size={16} />
+                    )}
                   </button>
                 </div>
               </div>
@@ -181,15 +198,13 @@ export default function General() {
         </div>
 
         <div className="mt-6">
-          {isEditing ? (
-            <button onClick={handleSave} className="inline-flex items-center justify-center gap-2 h-9 px-4 py-2 bg-blue-500 rounded-[10px] text-white text-sm font-medium leading-5 hover:bg-blue-600 transition-colors">
+          {isEditing && (
+            <button
+              onClick={handleSave}
+              className="inline-flex items-center justify-center gap-2 h-9 px-4 py-2 bg-blue-500 rounded-[10px] text-white text-sm font-medium leading-5 hover:bg-blue-600 transition-colors"
+            >
               <Save size={16} />
               <span>Save Admin Settings</span>
-            </button>
-          ) : (
-            <button onClick={() => setIsEditing(true)} className="inline-flex items-center justify-center gap-2 h-9 px-4 py-2 bg-gray-600 rounded-[10px] text-white text-sm font-medium leading-5 hover:bg-gray-700 transition-colors">
-              <Edit size={16} />
-              <span>Edit</span>
             </button>
           )}
         </div>
